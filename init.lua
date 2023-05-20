@@ -544,8 +544,8 @@ cmp.setup {
 -- More customized config
 
 vim.opt.expandtab = true
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
 
 -- Configuring keyboard shortcut for NvimTree
 vim.keymap.set('n', '<leader>n', ":NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
