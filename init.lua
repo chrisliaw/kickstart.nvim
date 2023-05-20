@@ -70,7 +70,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  --'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -196,6 +196,43 @@ require('lazy').setup({
   --    An additional note is that if you only copied in the `init.lua`, you can just comment this line
   --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
   { import = 'custom.plugins' },
+
+  -- Something like NerdTree
+  {
+  "nvim-tree/nvim-tree.lua",
+  version = "*",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  config = function()
+    require("nvim-tree").setup {
+      filters = {
+          dotfiles = false
+        }
+    }
+  end,
+  },
+
+-- Non Lazy load plugins
+--{ 
+--  "alexghergh/nvim-tmux-nagivation",
+--}
+
+  --{'romgrk/barbar.nvim',
+  --  dependencies = {
+  --    'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+  --    'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+  --  },
+  --  init = function() vim.g.barbar_auto_setup = false end,
+  --  opts = {
+  --    -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+  --    -- animation = true,
+  --    -- insert_at_start = true,
+  --    -- …etc.
+  --  },
+  --  version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  --},
+
 }, {})
 
 -- [[ Setting options ]]
@@ -298,7 +335,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'vimdoc', 'vim', 'ruby', 'java' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -429,6 +466,8 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+
+  ruby_ls = { },
 }
 
 -- Setup neovim lua configuration
@@ -501,6 +540,20 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- More customized config
+
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+
+-- Configuring keyboard shortcut for NvimTree
+vim.keymap.set('n', '<leader>n', ":NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
+
+vim.keymap.set('n', '<leader>h', "NvimTmuxNavigateLeft<CR>", { desc = "Nvim-Tmux go to left" })
+vim.keymap.set('n', '<leader>j', "NvimTmuxNavigateDown<CR>", { desc = "Nvim-Tmux go to below" })
+vim.keymap.set('n', '<leader>k', "NvimTmuxNavigateUp<CR>", { desc = "Nvim-Tmux go to up" })
+vim.keymap.set('n', '<leader>l', "NvimTmuxNavigateRight<CR>", { desc = "Nvim-Tmux go to right" })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
