@@ -213,6 +213,17 @@ require('lazy').setup({
   end,
   },
 
+  'tpope/vim-rails',
+  'tpope/vim-rake',
+  --'tpope/vim-ruby',
+
+  --{ 
+  --  'autozimu/LanguageClient-neovim',
+  --  { 
+  --    'branch': 'next', 
+  --    'build': 'bash install.sh' 
+  --  }
+  --},
 -- Non Lazy load plugins
 --{ 
 --  "alexghergh/nvim-tmux-nagivation",
@@ -554,6 +565,16 @@ vim.keymap.set('n', '<leader>h', "NvimTmuxNavigateLeft<CR>", { desc = "Nvim-Tmux
 vim.keymap.set('n', '<leader>j', "NvimTmuxNavigateDown<CR>", { desc = "Nvim-Tmux go to below" })
 vim.keymap.set('n', '<leader>k', "NvimTmuxNavigateUp<CR>", { desc = "Nvim-Tmux go to up" })
 vim.keymap.set('n', '<leader>l', "NvimTmuxNavigateRight<CR>", { desc = "Nvim-Tmux go to right" })
+
+-- Copy to clipboard
+vim.keymap.set({'n','x'}, 'cp','"+y')
+-- Paste from clipboard
+vim.keymap.set({'n','x'}, 'cv','"+p')
+-- Delete without changing register
+vim.keymap.set({'n','x'}, 'x','"_x')
+-- Select all text in current buffer
+vim.keymap.set('n', '<leader>gg',':keepjumps normal! ggVG<cr>')
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
